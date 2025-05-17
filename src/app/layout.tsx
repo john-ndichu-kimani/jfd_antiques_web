@@ -4,7 +4,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'JFD Collection African Antiques',
+  title: 'JFD Collections African Antiques',
   description: 'Preserving African cultural heritage through authentic artifacts',
 };
 
