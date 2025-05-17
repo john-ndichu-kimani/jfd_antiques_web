@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
       >
         <div className="container mx-auto px-4 flex justify-between items-center">
           <a href="/" className="flex items-center">
-            <span className="text-xl font-bold text-amber-900">JFD  African Antiques</span>
+            <span className="text-xl font-bold text-amber-900">JFD Collections African Antiques</span>
           </a>
           <Navigation />
           <button
