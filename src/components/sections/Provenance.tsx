@@ -21,9 +21,7 @@ export const Provenance: React.FC = () => {
               available for pieces that have remained on the African continent, we provide all known
               information about provenance and cultural context for every item in our collection.
             </p>
-            <Button className="mt-8 bg-amber-800 hover:bg-amber-900 border-amber-700">
-              Learn About Our Authentication Process
-            </Button>
+           
           </motion.div>
         </div>
       </div>

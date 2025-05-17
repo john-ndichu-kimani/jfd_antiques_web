@@ -6,15 +6,14 @@ export const navigation: NavigationItem[] = [
     name: 'Collections',
     href: '/collections',
     children: [
-      { name: 'Luba', href: '#' },
-      { name: 'Lega', href: '#' },
-      { name: 'Hemba', href: '#' },
-      { name: 'Mixed Tribal', href: '#' },
-      { name: 'View All', href: '/collections' },
+      { name: 'Masks', href: '#' },
+      { name: 'Figures', href: '#' },
+      { name: 'Other', href: '/collections' },
     ],
   },
-  { name: 'Featured Artifacts', href: '/artifacts' },
+  // { name: 'Featured Artifacts', href: '/artifacts' },
   { name: 'Our Story', href: '/about' },
+  { name: 'Gallery', href: '/gallery' },
  
-  { name: 'Contact', href: '#' },
+  { name: 'Contact', href: '/contact' },
 ];

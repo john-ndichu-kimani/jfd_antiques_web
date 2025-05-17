@@ -18,7 +18,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ label, items }) => {
       onMouseLeave={() => setIsOpen(false)}
     >
       <button
-        className="flex items-center gap-1 text-stone-700 hover:text-amber-800"
+        className="flex items-center gap-1 text-stone-100 hover:text-amber-200"
         onClick={() => setIsOpen(!isOpen)}
       >
         {label}
