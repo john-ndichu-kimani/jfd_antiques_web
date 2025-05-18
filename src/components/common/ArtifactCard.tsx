@@ -35,13 +35,13 @@ export const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, onSelect }
         }
       }}
     >
-      <div className="relative h-80">
+      <div className="relative" style={{height:'65vh'}}>
         <img
           src={artifact.image}
           alt={artifact.name}
           style={{
             width: "100%",
-            height: "100%",
+            height:"100%",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover"

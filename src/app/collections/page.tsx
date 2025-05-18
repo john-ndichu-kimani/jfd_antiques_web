@@ -14,9 +14,13 @@ interface Item {
   tribe: string;
   region: string;
   category: string;
+  price:number;
   period: string;
+  dimensions:string;
+  material:string;
   description: string;
-  imageUrl: string;
+  image: string;
+  images: string[];
   featured: boolean;
 }
 
@@ -42,61 +46,192 @@ interface ItemDetailViewProps {
 
 // Sample gallery data - in a real application, this would come from your CMS or API
 const galleryItems: Item[] = [
-  {
-    id: 1,
-    title: "Lega Mask",
-    tribe: "Lega",
-    region: "Eastern Congo",
-    category: "Masks",
-    period: "Mid 20th Century",
-    description: "A ceremonial heart-shaped mask used in Bwami society rituals, featuring characteristic white pigmentation and subtle facial details.",
-    imageUrl: "/images/antiques/mask1.jpg",
-    featured: true
-  },
-  {
-    id: 2,
-    title: "Figure",
-    tribe: "Lega",
-    region: "Democratic Republic of Congo",
-    category: "Figures",
-    period: "Early 20th Century",
-    description: "Carved wooden figure representing an important ancestor, with characteristic calm expression and hands resting on abdomen.",
-    imageUrl: "/images/antiques/figure1.jpg",
-    featured: true
-  },
+
+
   {
     id: 3,
     title: "Necklace",
     tribe: "Maasai",
     region: "Kenya",
     category: "Jewelry",
+     price:100,
+     material: "Wood, Kaolin, Patina",
     period: "Late 20th Century",
+     dimensions: "24 x 12 x 12 cm	",
     description: "Traditional beaded necklace with distinctive color pattern representing status within the community.",
-    imageUrl: "/images/antiques/maasai_neckless.jpg",
+    image: "/images/antiques/maasai_neckless.jpg",
+    images: ["/images/antiques/figure1.jpg", "/images/antiques/figure2.jpg"],
     featured: false
   },
-  {
-    id: 4,
-    title: "Spirit Mask",
-    tribe: "Lega",
-    region: "Democratic Republic of Congo",
-    category: "Masks",
-    period: "Early 20th Century",
-    description: "Wooden mask representing an ancestral spirit, with intricate scarification patterns and expressive features.",
-    imageUrl: "/images/antiques/mask5.jpg",
-    featured: true
-  },
-  {
-    id: 5,
-    title: "Initiation Mask",
-    tribe: "Lega",
-    region: "Democratic Republic of Congo",
-    category: "Masks",
-    period: "Mid 20th Century",
-    description: "White-faced mask used in coming-of-age ceremonies, representing idealized female beauty and ancestral spirits.",
-    imageUrl: "/images/antiques/mask3.jpg",
-    featured: true
-  },
+ 
+  
+    {
+      id: 104,
+      title: "Lega Ancestor Figure",
+      tribe: "Lega",
+      price: 300,
+      description: "Sakimatwematwe, Lega. Each head with holes for the eyes and he mouth, medium heavy wood,Traditional black patina and kaolin remnants on face. ",
+      material: "Wood, Kaolin, Patina",
+      dimensions: "24 x 12 x 12 cm	",
+      image: "/images/antiques/figure1.jpg",
+      images: ["/images/antiques/figure1.jpg", "/images/antiques/figure2.jpg"],
+      featured: false,
+      region: 'Democratic Republic of Congo',
+      category: 'Figure',
+      period: ''
+    },
+    {
+      id: 105,
+      title: "Shankadi head rest ",
+      tribe: "Luba",
+      price: 700,
+      description: "Follower of the famous Luba Shankadi head rest master artist. Heavy wood, quality carving, Nice patina.   ",
+      material: "Wood, Kaolin, Patina",
+      dimensions: "15 x 12 x 10 cm",
+      image: "/images/antiques/131_1.jpg",
+      images: ["/images/antiques/131_1.jpg", "/images/antiques/131_2.jpg"],
+      featured: false,
+      region: 'Democratic Republic of Congo',
+      category: '',
+      period: ''
+    },
+  
+    {
+      id: 106,
+      title: "Passport Mask Luba ",
+      tribe: "Luba",
+      price: 150,
+      description: "Nice little passport mask Luba, medium heavy wood, remnants of kaolin, quality carving, signs of usage. ",
+      material: "Wood, Kaolin",
+      dimensions: "9 x 9 x 3 cm",
+      image: "/images/antiques/54_1.jpg",
+      images: ["/images/antiques/54_1.jpg", "/images/antiques/54_2.jpg", "/images/antiques/54_3.jpg"],
+      featured: false,
+      region: 'Democratic Republic of Congo',
+      category: 'Masks',
+      period: ''
+    },
+   {
+     id: 107,
+     title: "Old Luba whistle ",
+     tribe: "Luba",
+     price: 80,
+     description: "Old little Luba whistle, dark wood, the carvings worn out by usage.",
+     material: "Wood",
+     dimensions: "10 x 3 x 2.5 cm		",
+     image: "/images/antiques/358_1.jpg",
+     images: ["/images/antiques/358_1.jpg", "/images/antiques/358_3.jpg"],
+     featured: false,
+     region: 'Democratic Republic of Congo',
+     category: '',
+     period: ''
+   },
+     {
+       id: 108,
+       title: "Little Luba whistle",
+       tribe: "Luba",
+       price: 90,
+       description: "little Luba whistle, heavy wood, worn traditional patina over dark wood, obvious signs of age and usage.",
+       material: "patina over dark wood",
+       dimensions: "10 x 5 x 3.5 cm		",
+       image: "/images/antiques/359_1.jpg",
+       images: ["/images/antiques/359_1.jpg", "/images/antiques/359_3.jpg", "/images/antiques/359_4.jpg"],
+       featured: false,
+       region: 'Democratic Republic of Congo',
+       category: '',
+       period: ''
+     },
+
+       {
+         id: 109,
+         title: "Old lega spoon",
+         tribe: "Lega",
+         price: 200,
+         description: "Old lega spoon, bone and vegetal rope, age and usage obvious.",
+         material: "bone, vegetable rope",
+         dimensions: "14 x 4.5 x 1 cm",
+         image: "/images/antiques/82_1.jpg",
+         images: ["/images/antiques/82_2.jpg", "/images/antiques/82_2.jpg"],
+         featured: false,
+         region: 'Democratic Republic of Congo',
+         category: '',
+         period: ''
+       },
+       {
+         id: 110,
+         title: "Small lega female figure",
+         tribe: "Lega",
+         price: 300,
+         description: "Small lega female figure. Known model, Heavy dark wood with traditional black patina, nail tacks for the eyes. Comes with beads tied to the foot.  Signs of age",
+         material: "Dark Wood , Black Patina, Nail Tacks",
+         dimensions: "25 x 6.5 x 5 cm",
+         image: "/images/antiques/94_1.jpg",
+         images: ["/images/antiques/94_1.jpg", "/images/antiques/94_2.jpg"],
+         featured: false,
+         region: 'Democratic Republic of Congo',
+         category: '',
+         period: ''
+       },
+        {
+          id: 111,
+          title: "Kakudji Luba female half figure",
+          tribe: "Luba",
+          price: 90,
+          description: "Kakudji Luba female half figure, heavy wood , a long slot in the back revealing age. Big hole at the top.  Worn traditional patina.",
+          material: "Heavy Wood , Black Patina",
+          dimensions: "13 x 4 x 4 cm	",
+          image: "/images/antiques/305_1.jpg",
+          images: ["/images/antiques/305_1.jpg", "/images/antiques/305_2.jpg"],
+          featured: false,
+          region: 'Democratic Republic of Congo',
+          category: '',
+          period: ''
+        },
+         {
+           id: 112,
+           title: "Luba whistle",
+           tribe: "Luba",
+           price: 90,
+           description: "Luba whistle, worn traditional patina over dark wood, female face on top. Signs of usage",
+           material: "Dark Wood ,Patina",
+           dimensions: "14 x 3 x 2.5 cm",
+           image: "/images/antiques/235_1.jpg",
+           images: ["/images/antiques/235_1.jpg", "/images/antiques/235_2.jpg"],
+           featured: false,
+           region: 'Democratic Republic of Congo',
+           category: '',
+           period: ''
+         },
+      {
+        id: 113,
+        title: "Songye kifwebe masculine mask",
+        tribe: "Songye kifwebe ",
+        price: 750,
+        description: "Songye kifwebe masculine mask, remnants of red traditional paint on the eyes and the mouth, but no trace of kaolin. A hole in the forefront and an old break in the back. Medium light wood. Quality carving. Age",
+        material: "Dark Wood ,Patina",
+        dimensions: "39 x 16 x 12.5 cm",
+        image: "/images/antiques/317_1.jpg",
+        images: ["/images/antiques/317_1.jpg", "/images/antiques/317_2.jpg"],
+        featured: false,
+        region: 'Democratic Republic of Congo',
+        category: '',
+        period: ''
+      },
+    {
+      id: 114,
+      title: "Zande doll",
+      tribe: "Zande",
+      price: 120,
+      description: "Zande doll, heavy wood, raffia rope.",
+      material: "Heavy Wood , Raffia",
+      dimensions: "22 x 9 x 7 cm",
+      image: "/images/antiques/317_1.jpg",
+      images: ["/images/antiques/317_1.jpg", "/images/antiques/317_2.jpg"],
+      featured: false,
+      region: 'Democratic Republic of Congo',
+      category: '',
+      period: ''
+    },
 ];
 
 // Extract unique filter options
@@ -510,9 +645,9 @@ export default function GalleryPage() {
                       }
                     }}
                   >
-                    <div className="relative h-80">
+                    <div className="relative " style={{height:'70vh'}}>
                       <img 
-                        src={item.imageUrl} 
+                        src={item.image} 
                         alt={item.title}
                         style={{width:"100%",height:"100%",backgroundPosition:"center",backgroundRepeat:"no-repeat",backgroundSize:"cover"}}
                        

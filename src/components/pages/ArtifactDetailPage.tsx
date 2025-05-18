@@ -52,7 +52,7 @@ export const ArtifactDetailPage: React.FC<ArtifactDetailPageProps> = ({ artifact
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Image Section */}
           <div className="relative">
-            <div className="relative h-[500px] bg-white rounded-lg overflow-hidden shadow-md">
+            <div className="relative  bg-white rounded-lg overflow-hidden shadow-md" style={{height:'100vh'}}>
               <AnimatePresence mode="wait">
                 <motion.img
                   key={currentImageIndex}
@@ -121,7 +121,7 @@ export const ArtifactDetailPage: React.FC<ArtifactDetailPageProps> = ({ artifact
           </div>
 
           {/* Details Section */}
-          <div className="bg-white rounded-lg p-6 shadow-md">
+          <div className="bg-white rounded-lg p-6 shadow-md" style={{height:"70vh"}}>
             <p className="text-sm font-medium text-amber-800">{artifact.tribe} Tribe</p>
             <h1 className="text-3xl font-bold text-stone-800 mt-2">{artifact.name}</h1>
             <p className="text-2xl font-semibold text-stone-800 mt-2">

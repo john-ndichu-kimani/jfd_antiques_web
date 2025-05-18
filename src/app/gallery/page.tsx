@@ -1,6 +1,14 @@
+"use client"
 import React from 'react';
+import { useEffect, useRef } from 'react';
+import { motion, useInView, useAnimation } from 'framer-motion';
 
 const Gallery = () => {
+    // Animation controls
+  const controls = useAnimation();
+  const heroRef = useRef(null);
+  const isHeroInView = useInView(heroRef, { once: true });
+
   // Placeholder images for African antiques (replace with actual JFD collection images)
   const antiques = [
     {
@@ -38,8 +46,30 @@ const Gallery = () => {
          
         </div>
 
+             <motion.section
+          ref={heroRef}
+          initial="hidden"
+          animate={controls}
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { 
+              opacity: 1, 
+              y: 0,
+              transition: { duration: 0.6 }
+            }
+          }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block py-1 px-4 bg-amber-100 text-amber-800 font-medium rounded-full mb-3">
+            Gallery
+          </span>
+          
+   
+
+        </motion.section>
+
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+        <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
           {antiques.map((antique, index) => (
             <div
               key={index}
@@ -53,7 +83,7 @@ const Gallery = () => {
               
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

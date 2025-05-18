@@ -17,7 +17,7 @@ export const FeaturedArtifacts: React.FC = () => {
               Highlighting our most significant pieces with unique historical and cultural importance.
             </p>
           </div>
-          <Link href="/artifacts">
+          <Link href="/collections">
             <Button className="mt-4 md:mt-0">
               View All Artifacts <ArrowRight size={16} />
             </Button>

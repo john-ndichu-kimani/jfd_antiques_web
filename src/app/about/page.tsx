@@ -56,8 +56,6 @@ export default function AboutPage() {
     }
   ];
 
- 
-
   return (
     <main className="relative overflow-hidden">
       {/* Background pattern */}
@@ -156,46 +154,76 @@ export default function AboutPage() {
             <div className="w-24 h-1 bg-amber-700 mx-auto mt-4"></div>
           </div>
 
-          <div className="relative">
-            {/* Timeline connector */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-amber-200 hidden md:block"></div>
-            
-            <div className="space-y-12 relative">
-              {timelineEvents.map((event, index) => (
-                <motion.div 
-                  key={event.year}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.6 }}
-                  className="flex flex-col md:flex-row items-center"
-                >
-                  <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:order-1 md:pl-12'}`}>
-                    <h3 className="text-2xl font-bold text-amber-800">{event.year}</h3>
-                    <h4 className="text-xl font-semibold text-stone-700 mt-2">{event.title}</h4>
-                    <div className="flex items-center mt-2 justify-end">
-                      <MapPin size={16} className="text-amber-600 mr-2" />
-                      <span className="text-stone-600">{event.location}</span>
-                    </div>
-                    <p className="text-stone-600 mt-3">{event.description}</p>
-                  </div>
-                  
-                  <div className="flex items-center justify-center my-4 md:my-0 z-10">
-                    <div className="w-12 h-12 rounded-full bg-amber-600 flex items-center justify-center shadow-lg">
-                      <div className="text-white">
-                        {event.icon}
-                      </div>
-                    </div>
-                  </div>
-                  
-                
-                </motion.div>
-              ))}
+      <div className="relative">
+  {/* Timeline connector - only visible on md and up */}
+  <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-amber-200 hidden md:block"></div>
+  
+  <div className="space-y-12 relative">
+    {timelineEvents.map((event, index) => (
+      <motion.div 
+        key={event.year}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.1, duration: 0.6 }}
+        className="relative"
+      >
+        {/* Desktop layout (md and up) - Zigzag pattern */}
+        <div className="hidden md:flex items-center">
+          {/* Left side content (even indexes) */}
+          <div className={`w-1/2 pr-12 text-right ${index % 2 === 0 ? 'block' : 'invisible'}`}>
+            <h3 className="text-2xl font-bold text-amber-800">{event.year}</h3>
+            <h4 className="text-xl font-semibold text-stone-700 mt-2">{event.title}</h4>
+            <div className="flex items-center mt-2 justify-end">
+              <MapPin size={16} className="text-amber-600 mr-2" />
+              <span className="text-stone-600">{event.location}</span>
+            </div>
+            <p className="text-stone-600 mt-3">{event.description}</p>
+          </div>
+          
+          {/* Center timeline node */}
+          <div className="flex items-center justify-center z-10">
+            <div className="w-12 h-12 rounded-full bg-amber-600 flex items-center justify-center shadow-lg">
+              <div className="text-white">
+                {event.icon}
+              </div>
             </div>
           </div>
+          
+          {/* Right side content (odd indexes) */}
+          <div className={`w-1/2 pl-12 ${index % 2 === 1 ? 'block' : 'invisible'}`}>
+            <h3 className="text-2xl font-bold text-amber-800">{event.year}</h3>
+            <h4 className="text-xl font-semibold text-stone-700 mt-2">{event.title}</h4>
+            <div className="flex items-center mt-2">
+              <MapPin size={16} className="text-amber-600 mr-2" />
+              <span className="text-stone-600">{event.location}</span>
+            </div>
+            <p className="text-stone-600 mt-3">{event.description}</p>
+          </div>
+        </div>
+        
+        {/* Mobile layout (always stacked vertically) */}
+        <div className="flex flex-col md:hidden">
+          <div className="flex items-center justify-center mb-4">
+            <div className="w-12 h-12 rounded-full bg-amber-600 flex items-center justify-center shadow-lg">
+              <div className="text-white">{event.icon}</div>
+            </div>
+          </div>
+          <div className="text-center px-4">
+            <h3 className="text-2xl font-bold text-amber-800">{event.year}</h3>
+            <h4 className="text-xl font-semibold text-stone-700 mt-2">{event.title}</h4>
+            <div className="flex items-center mt-2 justify-center">
+              <MapPin size={16} className="text-amber-600 mr-2" />
+              <span className="text-stone-600">{event.location}</span>
+            </div>
+            <p className="text-stone-600 mt-3">{event.description}</p>
+          </div>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</div>
         </motion.section>
-
-
 
         {/* Philosophy & Authentication */}
         <motion.section
