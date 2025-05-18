@@ -14,7 +14,8 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({ collection }) =>
       <img
         src={collection.image}
         alt={collection.name}
-        className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
+         style={{width:"100%",height:"100vh",backgroundPosition:"center",backgroundRepeat:"no-repeat",backgroundSize:"cover"}}
+        className=" transition-transform duration-500 group-hover:scale-110"
       />
       <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
         <h3 className="text-xl font-semibold text-white">{collection.name}</h3>

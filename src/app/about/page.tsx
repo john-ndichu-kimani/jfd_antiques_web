@@ -112,20 +112,14 @@ export default function AboutPage() {
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="md:w-1/2">
               <div className="relative">
-                <div className="absolute -top-4 -left-4 w-full h-full border-2 border-amber-700 rounded-md"></div>
                 <img
-                  src="/images/jfd_about.jpg"
+                  src="/images/antiques/stool.jpg"
                   alt="JFD in Kenya"
                   width={500}
                   height={500}
                   className="w-full h-auto object-cover rounded-md shadow-md relative z-10"
                 />
-                <div className="absolute -bottom-3 -right-3 bg-amber-100 px-4 py-2 rounded shadow-sm z-20">
-                  <div className="flex items-center text-amber-800">
-                    <Camera size={16} className="mr-2" />
-                    <span className="text-sm font-medium">Kenya, 2020</span>
-                  </div>
-                </div>
+               
               </div>
             </div>
             <div className="md:w-1/2">
@@ -194,19 +188,7 @@ export default function AboutPage() {
                     </div>
                   </div>
                   
-                  <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:order-1 md:pl-12' : 'md:pr-12'}`}>
-                    {index % 2 !== 0 && (
-                      <>
-                        <h3 className="text-2xl font-bold text-amber-800 md:text-right">{event.year}</h3>
-                        <h4 className="text-xl font-semibold text-stone-700 mt-2 md:text-right">{event.title}</h4>
-                        <div className="flex items-center mt-2 md:justify-end">
-                          <MapPin size={16} className="text-amber-600 mr-2" />
-                          <span className="text-stone-600">{event.location}</span>
-                        </div>
-                        <p className="text-stone-600 mt-3 md:text-right">{event.description}</p>
-                      </>
-                    )}
-                  </div>
+                
                 </motion.div>
               ))}
             </div>

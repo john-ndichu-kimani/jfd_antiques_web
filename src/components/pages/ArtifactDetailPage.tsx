@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 // Assuming Artifact model includes multiple images
 interface ArtifactWithImages extends Artifact {
   images: string[];
-  culturalSignificance: string;
   material: string;
 }
 
@@ -59,7 +58,8 @@ export const ArtifactDetailPage: React.FC<ArtifactDetailPageProps> = ({ artifact
                   key={currentImageIndex}
                   src={artifact.images[currentImageIndex]}
                   alt={`${artifact.name} - Image ${currentImageIndex + 1}`}
-                  className={`w-full h-full object-cover cursor-zoom-in transition-transform duration-300 ${
+                  style={{width:"100%",height:"100%",backgroundPosition:"center",backgroundRepeat:"no-repeat",backgroundSize:"cover"}}
+                  className={`cursor-zoom-in transition-transform duration-300 ${
                     isZoomed ? 'scale-150' : 'scale-100'
                   }`}
                   initial={{ opacity: 0 }}
@@ -129,16 +129,8 @@ export const ArtifactDetailPage: React.FC<ArtifactDetailPageProps> = ({ artifact
             </p>
             <p className="mt-4 text-stone-600">{artifact.description}</p>
             <div className="mt-6 space-y-4">
-              <div>
-                <p className="text-sm font-medium text-stone-700">Age</p>
-                <p className="text-stone-600">{artifact.age}</p>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-stone-700">Cultural Significance</p>
-                <p className="text-stone-600">
-                  {artifact.culturalSignificance || 'A significant piece with deep historical roots.'}
-                </p>
-              </div>
+             
+              
               <div>
                 <p className="text-sm font-medium text-stone-700">Material</p>
                 <p className="text-stone-600">{artifact.material || 'Traditional materials'}</p>

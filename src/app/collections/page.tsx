@@ -55,8 +55,8 @@ const galleryItems: Item[] = [
   },
   {
     id: 2,
-    title: "Ancestor Figure",
-    tribe: "Hemba",
+    title: "Figure",
+    tribe: "Lega",
     region: "Democratic Republic of Congo",
     category: "Figures",
     period: "Early 20th Century",
@@ -66,7 +66,7 @@ const galleryItems: Item[] = [
   },
   {
     id: 3,
-    title: "Tribal Necklace",
+    title: "Necklace",
     tribe: "Maasai",
     region: "Kenya",
     category: "Jewelry",
@@ -595,13 +595,12 @@ export default function GalleryPage() {
                       }
                     }}
                   >
-                    <div className="relative h-72">
-                      <Image 
+                    <div className="relative h-80">
+                      <img 
                         src={item.imageUrl} 
                         alt={item.title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover"
+                        style={{width:"100%",height:"100%",backgroundPosition:"center",backgroundRepeat:"no-repeat",backgroundSize:"cover"}}
+                       
                       />
                       {item.featured && (
                         <div className="absolute top-3 right-3 bg-amber-700 text-white text-xs px-2 py-1 rounded">

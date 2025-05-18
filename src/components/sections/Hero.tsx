@@ -19,7 +19,7 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-r from-stone-900 to-stone-950">
-      <div className="container mx-auto px-6 md:px-10 relative z-10 py-16 md:py-20">
+      <div className="container mx-auto px-6 md:px-10 relative z-10 py-10 md:py-20">
         <div className="flex flex-col lg:flex-row items-center">
           {/* Text content - left side */}
           <motion.div 
@@ -28,12 +28,14 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-3xl lg:text-4xl font-bold text-amber-300 leading-tight">
+            {/* <h1 className="text-3xl lg:text-4xl font-bold text-amber-300 leading-tight">
               JFD Collections African <br /> Antiques
-            </h1>
+            </h1> */}
             
-            <p className="mt-4 text-stone-100 text-md ">
-              Welcome to JFD Collections, a refined collection of authentic African antiques gathered over nearly 50 years across West and East Africa. Most pieces were acquired in the early 1990s from Bujumbura and Eastern Congo, when genuine artifacts were still found in villages and legacy collections from the Mobutu era.
+            <p className="text-stone-100 text-md mb-10 ">
+              Thank you for coming to this site. I have collected African Art for about 50 years, first in Abidjan, and later in East Africa. Today I live in Kenya where I am retired. And I brought my collection with me.
+I bought most of this collection when I was based in Bujumbura, Burundi, and I was travelling every week to Bukavu and Goma in Eastern Congo. In the early 90’s it was still possible to find a few real pieces. 
+
             </p>
             
             <div className="mt-6 flex flex-wrap gap-4">

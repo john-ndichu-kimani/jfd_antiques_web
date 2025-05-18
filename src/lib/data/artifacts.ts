@@ -1,43 +1,70 @@
-import { Artifact } from '@/models/Artifact';
+import { Artifact } from "@/models/Artifact";
 
 export const featuredArtifacts: Artifact[] = [
   {
     id: 101,
-    name: 'Luba Royal Stool',
-    tribe: 'Luba',
+    name: "Luba Royal Stool",
+    tribe: "Luba",
     price: 4800,
-    description: 'A ceremonial stool used by Luba royalty, intricately carved with ancestral figures and cultural symbols. Collected circa 1992.',
-    age: 'Approx. 80-100 years old',
-    material: 'Hardwood with natural patina',
-    dimensions: '45cm × 30cm × 35cm',
-    image: '/images/featured_artifacts/luba_stool.jpg',
-    images: ['/api/placeholder/500/500', '/api/placeholder/500/500', '/api/placeholder/500/500'],
-    culturalSignificance: ''
+    description:
+      "A ceremonial stool used by Luba royalty, intricately carved with ancestral figures and cultural symbols. Collected circa 1992.",
+    material: "Hardwood with natural patina",
+    dimensions: "45cm × 30cm × 35cm",
+    image: "/images/featured_artifacts/luba_stool.jpg",
+    images: [
+      "/api/placeholder/500/500",
+      "/api/placeholder/500/500",
+      "/api/placeholder/500/500",
+    ],
+  
   },
   {
     id: 102,
-    name: 'Lega Mask',
-    tribe: 'Lega',
-    price: 3200,
-    description: 'A traditional initiation mask from the Bwami society, representing ancestral wisdom and guidance.',
-    age: 'Approx. 60-70 years old',
-    material: 'Wood with kaolin clay patina',
-    dimensions: '25cm × 15cm × 8cm',
-    image: '/images/antiques/mask1.jpg',
-    images: ['/images/antiques/mask1.jpg', '/images/antiques/mask2.jpg', '/images/antiques/mask3.jpg'],
-    culturalSignificance: ''
+    name: "Lega Mask",
+    tribe: "Lega",
+    price: 500,
+    description:
+      "Lega mask, covered with an old coat of kaolin, light wood,rough cutting of the back, age and usage obvious  ",
+
+    material: "Coat with kaolin ",
+    dimensions: "28 x 16 x 9 cm. 	",
+    image: "/images/antiques/mask1.jpg",
+    images: [
+      "/images/antiques/mask1.jpg",
+      "/images/antiques/mask2.jpg",
+      "/images/antiques/mask3.jpg",
+    ],
+  
   },
   {
     id: 103,
-    name: 'Hemba Ancestor Figure',
-    tribe: 'Hemba',
-    price: 5600,
-    description: 'A powerful representation of a revered ancestor, carved with traditional Hemba stylistic elements featuring a serene expression and elaborate headdress.',
-    age: 'Approx. 70-90 years old',
-    material: 'Hardwood with ceremonial oils',
-    dimensions: '58cm × 22cm × 18cm',
-    image: '/images/antiques/figure1.jpg',
-    images: ['/images/antiques/figure1.jpg', '/images/antiques/figure2.jpg'],
-    culturalSignificance: ''
+    name: "Lega Mask",
+    tribe: "Lega",
+    price: 450,
+    description:
+      "Lega mask with small horns, medium light wood, kaolin remaining on most of the face. Signs of usage, remnant of raffia beard. ",
+
+    material: "Kaolin",
+    dimensions: "24 x 17 x 7 cm",
+    image: "/images/antiques/mask4.jpg",
+    images: [
+      "/images/antiques/mask4.jpg",
+      "/images/antiques/mask5.jpg",
+      "/images/antiques/mask6.jpg",
+    ],
+ 
+  },
+  {
+    id: 104,
+    name: "Lega Ancestor Figure",
+    tribe: "Lega",
+    price: 300,
+    description:
+      "Sakimatwematwe, Lega. Each head with holes for the eyes and he mouth, medium heavy wood,Traditional black patina and kaolin remnants on face. ",
+    material: "Wood, Kaolin, Patina",
+    dimensions: "24 x 12 x 12 cm	",
+    image: "/images/antiques/figure1.jpg",
+    images: ["/images/antiques/figure1.jpg", "/images/antiques/figure2.jpg"],
+
   },
 ];

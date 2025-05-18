@@ -16,11 +16,12 @@ export const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact }) => {
       transition={{ type: 'spring', stiffness: 300 }}
       className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
     >
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-80 ">
         <img
           src={artifact.image}
           alt={artifact.name}
-          className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-110"
+           style={{width:"100%",backgroundPosition:"center",backgroundRepeat:"no-repeat",backgroundSize:"cover"}}
+          className=" object-cover transform transition-transform duration-500 hover:scale-110"
         />
         <button className="absolute top-3 right-3 bg-white p-1.5 rounded-full shadow-md hover:bg-stone-100">
           <Heart size={18} className="text-stone-600 hover:text-red-500" />
@@ -36,7 +37,6 @@ export const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact }) => {
         </div>
         <p className="mt-2 text-stone-600 text-sm line-clamp-2">{artifact.description}</p>
         <div className="mt-4 flex justify-between items-center">
-          <p className="text-xs text-stone-500">{artifact.age}</p>
           <Link href={`/artifacts/${artifact.id}`}>
             <Button primary={false} className="text-sm px-4 py-2">
               View Details

@@ -41,8 +41,9 @@ export const Header: React.FC = () => {
             
             {/* Logo (centered) */}
             <a href="/" className="flex flex-col items-center mx-auto">
-              <div className="text-amber-500 font-bold text-5xl flex items-center">
-                <span className="mr-1">JFD </span>
+              <div className="text-amber-500 font-bold  text-3xl flex items-center">
+                <span className="mr-1">JFD Collection African
+Antiques </span>
                 
               </div>
             </a>
