@@ -3,6 +3,7 @@ export interface Collection {
   name: string;
   description: string;
   items: number;
+  href:string;
   image: string;
   featured: boolean;
 }

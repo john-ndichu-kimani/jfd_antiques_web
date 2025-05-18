@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { Button } from './Button';
+import Link from 'next/link';
 import { Collection } from '@/models/Collection';
 
 interface CollectionCardProps {
@@ -19,9 +20,11 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({ collection }) =>
         <h3 className="text-xl font-semibold text-white">{collection.name}</h3>
         <p className="text-stone-200 mt-1 text-sm">{collection.items} artifacts</p>
         <p className="text-stone-300 mt-2 text-sm line-clamp-2">{collection.description}</p>
-        <Button className="mt-4 text-sm px-4 py-2 bg-white/20 backdrop-blur-sm hover:bg-white/40 text-white border border-white/40">
-          Explore Collection <ArrowRight size={16} />
-        </Button>
+        <Link href={`/collections?category=${collection.href}`}>
+          <Button className="mt-4 text-sm px-4 py-2 bg-white/20 backdrop-blur-sm hover:bg-white/40 text-white border border-white/40">
+            Explore Collection <span className="ml-2 inline-flex items-center"><ArrowRight size={16} /></span>
+          </Button>
+        </Link>
       </div>
       {collection.featured && (
         <div className="absolute top-4 left-4 bg-amber-800 text-white text-xs font-bold py-1 px-3 rounded-full z-20">
@@ -29,5 +32,7 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({ collection }) =>
         </div>
       )}
     </div>
+
+    // http://localhost:3000/collections?category=Masks
   );
 };

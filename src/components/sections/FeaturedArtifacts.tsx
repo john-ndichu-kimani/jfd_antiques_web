@@ -1,5 +1,7 @@
+'use client';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../common/Button';
+import Link from 'next/link';
 import { ArtifactCard } from '../common/ArtifactCard';
 import { featuredArtifacts } from '@/lib/data/artifacts';
 
@@ -15,9 +17,11 @@ export const FeaturedArtifacts: React.FC = () => {
               Highlighting our most significant pieces with unique historical and cultural importance.
             </p>
           </div>
-          <Button className="mt-4 md:mt-0">
-            View All Artifacts <ArrowRight size={16} />
-          </Button>
+          <Link href="/artifacts">
+            <Button className="mt-4 md:mt-0">
+              View All Artifacts <ArrowRight size={16} />
+            </Button>
+          </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredArtifacts.map((artifact) => (

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
 import { Button } from './Button';
 import { Artifact } from '@/models/Artifact';
+import Link from 'next/link';
 
 interface ArtifactCardProps {
   artifact: Artifact;
@@ -36,9 +37,11 @@ export const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact }) => {
         <p className="mt-2 text-stone-600 text-sm line-clamp-2">{artifact.description}</p>
         <div className="mt-4 flex justify-between items-center">
           <p className="text-xs text-stone-500">{artifact.age}</p>
-          <Button primary={false} className="text-sm px-4 py-2">
-            View Details
-          </Button>
+          <Link href={`/artifacts/${artifact.id}`}>
+            <Button primary={false} className="text-sm px-4 py-2">
+              View Details
+            </Button>
+          </Link>
         </div>
       </div>
     </motion.div>

@@ -41,14 +41,10 @@ export const Header: React.FC = () => {
             
             {/* Logo (centered) */}
             <a href="/" className="flex flex-col items-center mx-auto">
-              <div className="text-amber-100 font-bold text-2xl flex items-center">
-                <span className="mr-1">JFD</span>
-                <span className="relative">
-                  <span className="absolute -top-1 left-0 w-full h-0.5 bg-amber-100"></span>
-                  Collections
-                </span>
+              <div className="text-amber-500 font-bold text-5xl flex items-center">
+                <span className="mr-1">JFD </span>
+                
               </div>
-              <span className="text-amber-100 text-sm mt-0.5">African Antiques</span>
             </a>
             
             {/* Right utility icon (cart) */}
@@ -69,7 +65,7 @@ export const Header: React.FC = () => {
         </div>
       </header>
       <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
-      <div className="h-32"></div>
+      <div className="h-40 bg-stone-900"></div>
     </>
   );
 };

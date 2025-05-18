@@ -1,4 +1,5 @@
 export interface Artifact {
+  culturalSignificance: string;
   id: number;
   name: string;
   tribe: string;

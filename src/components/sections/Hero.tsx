@@ -1,20 +1,25 @@
 'use client';
-
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MapPin, ArrowRight, Info } from 'lucide-react';
 import { Button } from '../common/Button';
 
-export const Hero: React.FC = () => {
-  return (
-    <section className="bgstone-900 to-stone-800  relative overflow-hidden">
-      {/* Decorative blobs */}
-      <div className="absolute top-0 right-0 w-full h-full overflow-hidden opacity-20">
-        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-amber-500 blur-3xl"></div>
-        <div className="absolute bottom-20 left-40 w-80 h-80 rounded-full bg-amber-700 blur-3xl"></div>
-        <div className="absolute top-40 right-20 w-72 h-72 rounded-full bg-stone-600 blur-3xl"></div>
-      </div>
+export default function Hero() {
+  // State to control the pattern animation
+  const [patternOffset, setPatternOffset] = useState(0);
+  
+  // Subtle animation for the background pattern
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPatternOffset(prev => (prev + 0.5) % 100);
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
 
-      <div className="container mx-auto px-4 relative z-10 py-16">
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-r from-stone-900 to-stone-950">
+      <div className="container mx-auto px-6 md:px-10 relative z-10 py-16 md:py-20">
         <div className="flex flex-col lg:flex-row items-center">
           {/* Text content - left side */}
           <motion.div 
@@ -23,30 +28,34 @@ export const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-stone-900 leading-tight">
-              Authentic Antiques
+            <h1 className="text-3xl lg:text-4xl font-bold text-amber-300 leading-tight">
+              JFD Collections African <br /> Antiques
             </h1>
             
-            <p className="mt-4 text-stone-700 text-lg">
-              Rare Lega masks and artifacts acquired directly from Eastern Congo in the early 90s, 
-              curated by a lifetime collector.
+            <p className="mt-4 text-stone-100 text-md ">
+              Welcome to JFD Collections, a refined collection of authentic African antiques gathered over nearly 50 years across West and East Africa. Most pieces were acquired in the early 1990s from Bujumbura and Eastern Congo, when genuine artifacts were still found in villages and legacy collections from the Mobutu era.
             </p>
             
             <div className="mt-6 flex flex-wrap gap-4">
-              <Button primary>
-                Explore Collection <ArrowRight size={18} />
-              </Button>
-              <Button
-                primary={false}
-                className="bg-transparent border border-stone-400 text-stone-200 hover:bg-stone-800 hover:text-white"
-              >
-                Our Story <Info size={18} />
-              </Button>
+              <Link href="/collections">
+                <Button primary>
+                  Explore Collections <ArrowRight size={18} className="ml-2" />
+                </Button>
+              </Link>
+
+              <Link href="/about">
+                <Button
+                  primary={false}
+                  className="bg-gray-300 border border-stone-400 text-stone-200 hover:bg-amber-100 hover:text-amber-900"
+                >
+                  Read More <Info size={18} className="ml-2" />
+                </Button>
+              </Link>
             </div>
             
             <div className="mt-8 flex items-center">
               <MapPin size={18} className="text-amber-400 mr-2" />
-              <span className="text-stone-700">
+              <span className="text-stone-200">
                 Kenya-based collection from the Democratic Republic of Congo
               </span>
             </div>
@@ -64,21 +73,45 @@ export const Hero: React.FC = () => {
             }}
           >
             <div className="relative">
-              {/* Circular glow behind artifact */}
-              <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-xl"></div>
+              {/* Decorative circle behind the artifact */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-amber-900 opacity-20 blur-lg"></div>
               
               {/* The artifact image */}
-              <img
+              <motion.img
                 src="/images/jfd_hero.png"
                 alt="Featured African Artifact"
-                className="relative z-10 max-h-80 object-contain drop-shadow-2xl"
+                className="relative z-10 max-h-96 object-contain drop-shadow-2xl"
+                animate={{ 
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
               />
               
-            
+              {/* Decorative tribal pattern elements */}
+              <div className="absolute -right-16 top-1/4 w-16 h-32 opacity-20 rotate-12">
+                <svg viewBox="0 0 100 200" className="w-full h-full">
+                  <path d="M50,0 L100,50 L50,100 L0,50 Z" fill="none" stroke="#F59E0B" strokeWidth="2" />
+                  <path d="M50,100 L100,150 L50,200 L0,150 Z" fill="none" stroke="#F59E0B" strokeWidth="2" />
+                </svg>
+              </div>
+              
+              <div className="absolute -left-16 bottom-1/4 w-16 h-32 opacity-20 -rotate-12">
+                <svg viewBox="0 0 100 200" className="w-full h-full">
+                  <path d="M50,0 L100,50 L50,100 L0,50 Z" fill="none" stroke="#F59E0B" strokeWidth="2" />
+                  <path d="M50,100 L100,150 L50,200 L0,150 Z" fill="none" stroke="#F59E0B" strokeWidth="2" />
+                </svg>
+              </div>
             </div>
           </motion.div>
         </div>
       </div>
+      
+      {/* Bottom decorative element */}
+      <div className="absolute bottom-0 left-0 w-full h-2 bg-amber-700 opacity-30"></div>
     </section>
   );
-};
+}
