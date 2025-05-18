@@ -336,91 +336,7 @@ export default function GalleryPage() {
     );
   };
 
-  // Detail view for selected item
-  const ItemDetailView = ({ item, onClose }: ItemDetailViewProps) => {
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4 overflow-y-auto">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          className="bg-white rounded-lg overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col md:flex-row"
-        >
-          {/* Close button */}
-          <button 
-            className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md z-10"
-            onClick={onClose}
-            type="button"
-            aria-label="Close"
-          >
-            <X size={20} className="text-stone-800" />
-          </button>
-          
-          {/* Image section */}
-          <div className="md:w-1/2 bg-stone-100">
-            <div className="h-full flex items-center justify-center p-6 relative">
-              <div className="relative w-full h-full flex items-center justify-center">
-                <Image 
-                  src={item.imageUrl} 
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  style={{ objectFit: 'contain' }}
-                  priority
-                />
-              </div>
-            </div>
-          </div>
-          
-          {/* Content section */}
-          <div className="md:w-1/2 p-8 overflow-y-auto">
-            <h2 className="text-2xl font-bold text-stone-800">{item.title}</h2>
-            
-            <div className="mt-6 space-y-4">
-              <div className="flex items-start">
-                <span className="w-24 text-sm text-stone-500">Tribe:</span>
-                <span className="font-medium text-stone-800">{item.tribe}</span>
-              </div>
-              
-              <div className="flex items-start">
-                <span className="w-24 text-sm text-stone-500">Region:</span>
-                <div className="flex items-center">
-                  <MapPin size={16} className="text-amber-700 mr-2" />
-                  <span className="font-medium text-stone-800">{item.region}</span>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <span className="w-24 text-sm text-stone-500">Category:</span>
-                <span className="font-medium text-stone-800">{item.category}</span>
-              </div>
-              
-              <div className="flex items-start">
-                <span className="w-24 text-sm text-stone-500">Period:</span>
-                <span className="font-medium text-stone-800">{item.period}</span>
-              </div>
-            </div>
-            
-            <div className="mt-8">
-              <h3 className="text-lg font-medium text-stone-800 mb-2">About this piece</h3>
-              <p className="text-stone-600">{item.description}</p>
-            </div>
-            
-            <div className="mt-8 pt-4 border-t border-stone-200">
-              <Link href="/contact">
-                <button 
-                  className="px-6 py-3 bg-amber-700 text-white rounded-md hover:bg-amber-800 transition"
-                  type="button"
-                >
-                  Inquire About This Piece
-                </button>
-              </Link>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    );
-  };
+ 
 
   return (
     <main className="relative min-h-screen">
@@ -575,7 +491,6 @@ export default function GalleryPage() {
             )}
           </AnimatePresence>
 
-          {/* Gallery Grid */}
           <div className="flex-grow">
             {visibleItems.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -619,13 +534,16 @@ export default function GalleryPage() {
                         <MapPin size={16} className="text-amber-700 mr-1" aria-hidden="true" />
                         <span className="text-sm text-stone-600">{item.region}</span>
                       </div>
-                      <button 
-                        className="mt-3 flex items-center text-amber-700 hover:text-amber-800 text-sm font-medium"
-                        type="button"
-                      >
-                        <Info size={14} className="mr-1" aria-hidden="true" />
-                        View Details
-                      </button>
+                     <Link href={`/artifacts/${item.id}`}>
+
+        <button
+          className="mt-3 flex items-center text-amber-700 hover:text-amber-800 text-sm font-medium"
+          type="button"
+        >
+          <Info size={14} className="mr-1" aria-hidden="true" />
+          View Details
+        </button>
+        </Link>
                     </div>
                   </motion.div>
                 ))}
@@ -648,15 +566,8 @@ export default function GalleryPage() {
         </div>
       </div>
 
-      {/* Item detail modal */}
-      <AnimatePresence>
-        {selectedItem && (
-          <ItemDetailView 
-            item={selectedItem} 
-            onClose={() => setSelectedItem(null)} 
-          />
-        )}
-      </AnimatePresence>
+    
+    
     </main>
   );
 }

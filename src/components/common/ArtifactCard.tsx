@@ -1,48 +1,79 @@
+
 'use client';
+
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Heart } from 'lucide-react';
-import { Button } from './Button';
+import { Info, MapPin } from 'lucide-react';
 import { Artifact } from '@/models/Artifact';
 import Link from 'next/link';
 
 interface ArtifactCardProps {
   artifact: Artifact;
+  onSelect?: (artifact: Artifact) => void;
 }
 
-export const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact }) => {
+export const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, onSelect }) => {
+  const handleSelect = () => {
+    if (onSelect) {
+      onSelect(artifact);
+    }
+  };
+  
   return (
     <motion.div
-      whileHover={{ y: -8 }}
-      transition={{ type: 'spring', stiffness: 300 }}
-      className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+      key={artifact.id}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="bg-white rounded-lg overflow-hidden shadow-md cursor-pointer hover:shadow-lg transition-shadow"
+      onClick={handleSelect}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          handleSelect();
+        }
+      }}
     >
-      <div className="relative h-80 ">
+      <div className="relative h-80">
         <img
           src={artifact.image}
           alt={artifact.name}
-           style={{width:"100%",backgroundPosition:"center",backgroundRepeat:"no-repeat",backgroundSize:"cover"}}
-          className=" object-cover transform transition-transform duration-500 hover:scale-110"
+          style={{
+            width: "100%",
+            height: "100%",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover"
+          }}
         />
-        <button className="absolute top-3 right-3 bg-white p-1.5 rounded-full shadow-md hover:bg-stone-100">
-          <Heart size={18} className="text-stone-600 hover:text-red-500" />
-        </button>
+        {artifact.featured && (
+          <div className="absolute top-3 right-3 bg-amber-700 text-white text-xs px-2 py-1 rounded">
+            Featured
+          </div>
+        )}
       </div>
       <div className="p-4">
-        <div className="flex justify-between items-start">
-          <div>
-            <p className="text-sm font-medium text-amber-800">{artifact.tribe} Tribe</p>
-            <h3 className="text-lg font-semibold text-stone-800 mt-1">{artifact.name}</h3>
-          </div>
-          <p className="text-lg font-bold text-stone-800">${artifact.price.toLocaleString()}</p>
+        <h3 className="font-bold text-stone-800">{artifact.name}</h3>
+        <div className="flex items-center mt-1">
+          <span className="text-sm text-stone-500">{artifact.tribe}</span>
+          <span className="mx-2 text-stone-300">•</span>
+          <span className="text-sm text-stone-500">${artifact.price}</span>
         </div>
-        <p className="mt-2 text-stone-600 text-sm line-clamp-2">{artifact.description}</p>
-        <div className="mt-4 flex justify-between items-center">
-          <Link href={`/artifacts/${artifact.id}`}>
-            <Button primary={false} className="text-sm px-4 py-2">
-              View Details
-            </Button>
-          </Link>
+        <div className="flex items-center mt-3">
+          <MapPin size={16} className="text-amber-700 mr-1" aria-hidden="true" />
+          <span className="text-sm text-stone-600">{artifact.dimensions}</span>
         </div>
+        <Link href={`/artifacts/${artifact.id}`}>
+
+        <button
+          className="mt-3 flex items-center text-amber-700 hover:text-amber-800 text-sm font-medium"
+          type="button"
+        >
+          <Info size={14} className="mr-1" aria-hidden="true" />
+          View Details
+        </button>
+        </Link>
       </div>
     </motion.div>
   );

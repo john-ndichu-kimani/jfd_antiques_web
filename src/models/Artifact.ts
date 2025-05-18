@@ -7,6 +7,7 @@ export interface Artifact {
   description: string;
   material: string;
   dimensions: string;
+  featured:boolean;
   image: string;
   images: string[];
 }
