@@ -77,7 +77,7 @@ const galleryItems: Item[] = [
       images: ["/images/antiques/figure1.jpg", "/images/antiques/figure2.jpg"],
       featured: false,
       region: 'Democratic Republic of Congo',
-      category: 'Figure',
+      category: 'Figures',
       period: ''
     },
     {
