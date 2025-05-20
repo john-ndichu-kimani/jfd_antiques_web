@@ -6,7 +6,6 @@ import { Artifact } from '@/models/Artifact';
 // Extend Artifact for ArtifactDetailPage
 interface ArtifactWithImages extends Artifact {
   images: string[];
-  culturalSignificance: string;
   material: string;
 }
 
@@ -20,7 +19,6 @@ export default async function ArtifactPage({ params }: { params: Promise<{ id: s
   const artifactWithImages: ArtifactWithImages = {
     ...artifact,
     images: artifact.images || [artifact.image],
-    culturalSignificance: artifact.culturalSignificance || 'A significant piece with deep historical roots.',
     material: artifact.material || 'Traditional materials',
   };
   return <ArtifactDetailPage artifact={artifactWithImages} />;

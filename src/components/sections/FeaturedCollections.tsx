@@ -15,7 +15,7 @@ export const FeaturedCollections: React.FC = () => {
             artistic traditions, cultural significance, and historical context.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3  gap-6">
           {collections.map((collection) => (
             <CollectionCard key={collection.id} collection={collection} />
           ))}

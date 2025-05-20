@@ -37,7 +37,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                         <ul className="pl-4 space-y-2">
                           {item.children.map((child) => (
                             <li key={child.name}>
-                              <a href={child.href} className="text-stone-600 hover:text-amber-800">
+                              <a href={`/collections?category=${child.href}`} className="text-stone-600 hover:text-amber-800">
                                 {child.name}
                               </a>
                             </li>

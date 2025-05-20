@@ -1,12 +1,10 @@
-import type { Metadata } from 'next';
+'use client';
+
 import '@/styles/global.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { AuthProvider } from '@/contexts/AuthContext';
 
-export const metadata: Metadata = {
-  title: 'JFD Collections African Antiques',
-  description: 'Preserving African cultural heritage through authentic artifacts',
-};
 
 export default function RootLayout({
   children,
@@ -16,9 +14,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-stone-50 font-sans">
+       <AuthProvider>
         <Header />
         {children}
         <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

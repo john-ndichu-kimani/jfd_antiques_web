@@ -20,6 +20,14 @@ export const collections: Collection[] = [
     image: '/images/antiques/figure1.jpg',
     featured: false,
   },
- 
+ {
+    id: 3,
+    name: 'Others',
+    description: 'Sculptures and ceremonial items from the Hemba people',
+    items: 10,
+    href:"Figures",
+    image: '/images/hero1.jpg',
+    featured: false,
+  },
   
 ];

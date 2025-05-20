@@ -1,14 +1,22 @@
 "use client"
 
 import { useState } from 'react';
-import { Menu, Search, User, ShoppingCart } from 'lucide-react';
+import { Menu, User, ShoppingCart } from 'lucide-react';
 import { Navigation } from './Navigation';
 import { MobileMenu } from './MobileMenu';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
+import Link from 'next/link';
+import { useAuth } from '@/hooks/useAuth';
+
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const scrolled = useScrollPosition();
+  const { user, isAuthenticated } = useAuth(); // Get auth status
+
+  function logout(): void {
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <>
@@ -31,31 +39,62 @@ export const Header: React.FC = () => {
             </div>
             
             <div className="hidden lg:flex items-center space-x-5">
-              <button className="text-stone-200 hover:text-amber-100 transition-colors">
-                <Search size={20} />
-              </button>
-              <button className="text-stone-200 hover:text-amber-00 transition-colors">
-                <User size={20} />
-              </button>
+              {/* Profile icon with dropdown functionality */}
+              <div className="relative">
+                <button className="text-stone-200 hover:text-amber-100 transition-colors">
+                  <User size={20} />
+                </button>
+                <div className="absolute right-0 mt-2 w-48 bg-stone-800 rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                  {isAuthenticated ? (
+                    <>
+                      <Link 
+                        href="/profile" 
+                        className="block px-4 py-2 text-sm text-stone-200 hover:bg-stone-700"
+                      >
+                        My Profile
+                      </Link>
+                      <button 
+                        onClick={() => logout()} 
+                        className="block w-full text-left px-4 py-2 text-sm text-stone-200 hover:bg-stone-700"
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link 
+                        href="/login" 
+                        className="block px-4 py-2 text-sm text-stone-200 hover:bg-stone-700"
+                      >
+                        Sign In
+                      </Link>
+                      <Link 
+                        href="/register" 
+                        className="block px-4 py-2 text-sm text-stone-200 hover:bg-stone-700"
+                      >
+                        Register
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
             </div>
             
             {/* Logo (centered) */}
-            <a href="/" className="flex flex-col items-center mx-auto">
-              <div className="text-amber-500 font-bold  text-3xl flex items-center">
-                <span className="mr-1">JFD Collection African
-Antiques </span>
-                
+            <Link href="/" className="flex flex-col items-center mx-auto">
+              <div className="text-amber-500 font-bold text-3xl flex items-center">
+                <span className="mr-1">JFD Collection African Antiques</span>
               </div>
-            </a>
+            </Link>
             
             {/* Right utility icon (cart) */}
             <div className="flex items-center">
-              <button className="relative text-stone-100 hover:text-amber-800 transition-colors">
+              <Link href="/cart" className="relative text-stone-100 hover:text-amber-800 transition-colors">
                 <ShoppingCart size={22} />
                 <span className="absolute -top-2 -right-2 bg-amber-800 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                  0
+                  {user?.cartItems?.length || 0}
                 </span>
-              </button>
+              </Link>
             </div>
           </div>
           

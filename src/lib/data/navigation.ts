@@ -6,8 +6,8 @@ export const navigation: NavigationItem[] = [
     name: 'Collections',
     href: '/collections',
     children: [
-      { name: 'Masks', href: '/masks' },
-      { name: 'Figures', href: '/figures' },
+      { name: 'Masks', href: 'Masks' },
+      { name: 'Figures', href: 'Figures' },
       { name: 'Other', href: '/collections' },
     ],
   },
