@@ -9,8 +9,6 @@ import { Product, ProductResponse } from '@/types/product';
 import { useCartActions } from '@/hooks/useCartActions';
 import { MiniCart } from '@/components/cart/MiniCart';
 
-
-
 export default function ProductDetailPage({ params }:  {
   params: Promise<{ id: string }>;
 }) {
@@ -20,6 +18,14 @@ export default function ProductDetailPage({ params }:  {
   const [error, setError] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+
+  // Helper function to convert string price to number
+const parsePrice = (price: string | number): number => {
+  if (typeof price === 'number') return price;
+  // Remove any currency symbols and parse as float
+  const cleanPrice = price.replace(/[^\d.-]/g, '');
+  return parseFloat(cleanPrice) || 0;
+};
   
   // Get the unwrapped params.id using React.use()
   const { id } = use(params) as { id: string };
@@ -29,7 +35,7 @@ export default function ProductDetailPage({ params }:  {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const response: ProductResponse = await getProductById(id); // Use the unwrapped id
+        const response: ProductResponse = await getProductById(id);
         
         if (response.success && response.data?.product) {
           setProduct(response.data.product);
@@ -49,13 +55,37 @@ export default function ProductDetailPage({ params }:  {
     if (id) {
       fetchProduct();
     }
-  }, [id]); // Use id as dependency
+  }, [id]);
 
   const handleAddToCart = async () => {
     if (product) {
       await addToCart(quantity);
     }
   };
+
+  // Helper function to get image URL
+  const getImageUrl = (index: number): string => {
+    if (product?.images && product.images[index]) {
+      return product.images[index].url;
+    }
+    return '/placeholder-product.jpg';
+  };
+
+  // Helper function to get main image
+  const getMainImageIndex = (): number => {
+    if (product?.images) {
+      const mainImageIndex = product.images.findIndex(img => img.isMain);
+      return mainImageIndex !== -1 ? mainImageIndex : 0;
+    }
+    return 0;
+  };
+
+  // Set main image as selected when product loads
+  useEffect(() => {
+    if (product?.images && product.images.length > 0) {
+      setSelectedImage(getMainImageIndex());
+    }
+  }, [product]);
 
   if (loading) {
     return (
@@ -106,26 +136,26 @@ export default function ProductDetailPage({ params }:  {
             <div className="lg:col-span-3">
               <div className="relative rounded-lg overflow-hidden mb-4" style={{ height: '400px' }}>
                 <img 
-                  src={product.images[selectedImage] || '/placeholder-product.jpg'} 
+                  src={getImageUrl(selectedImage)} 
                   alt={product.name}
                   className="w-full h-full object-cover"
                 />
               </div>
               
               {/* Thumbnail gallery if more than one image */}
-              {product.images.length > 1 && (
+              {product.images && product.images.length > 1 && (
                 <div className="flex overflow-x-auto space-x-2 pb-2">
                   {product.images.map((image, index) => (
                     <button
-                      key={index}
+                      key={image.id}
                       onClick={() => setSelectedImage(index)}
                       className={`flex-shrink-0 w-20 h-20 rounded-md overflow-hidden border-2 ${
                         selectedImage === index ? 'border-amber-600' : 'border-transparent'
                       }`}
                     >
                       <img 
-                        src={image} 
-                        alt={`${product.name} - Image ${index + 1}`}
+                        src={image.url} 
+                        alt={image.altText || `${product.name} - Image ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
                     </button>
@@ -140,9 +170,14 @@ export default function ProductDetailPage({ params }:  {
                 <span className="text-sm bg-amber-100 text-amber-800 px-2 py-1 rounded">
                   {product.category.name}
                 </span>
-                {product.isPublished && (
+                {product.isFeatured && (
                   <span className="ml-2 text-sm bg-green-100 text-green-800 px-2 py-1 rounded">
                     Featured
+                  </span>
+                )}
+                {product.isAntique && (
+                  <span className="ml-2 text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded">
+                    Antique
                   </span>
                 )}
               </div>
@@ -151,70 +186,105 @@ export default function ProductDetailPage({ params }:  {
               
               <div className="flex items-center mb-4">
                 <MapPin size={16} className="text-amber-700 mr-1" />
-                <span className="text-stone-600">Made by {product.tribe.name} from {product.tribe.region}</span>
+                <span className="text-stone-600">
+                  Made by {product.tribe.name} from {product.tribe.region}, {product.tribe.country}
+                </span>
               </div>
               
               <div className="text-2xl font-bold text-amber-700 mb-6">
-                ${product.price}
+                ${typeof product.price === 'string' ? product.price : product.price}
               </div>
               
               <div className="bg-stone-50 p-4 rounded-lg mb-6">
                 <h3 className="font-medium mb-2">Description</h3>
                 <p className="text-stone-600">{product.description}</p>
               </div>
+
+              {/* Product details section */}
+              <div className="bg-stone-50 p-4 rounded-lg mb-6">
+                <h3 className="font-medium mb-3">Product Details</h3>
+                <div className="space-y-2 text-sm">
+                  {product.origin && (
+                    <div className="flex justify-between">
+                      <span className="text-stone-600">Origin:</span>
+                      <span className="text-stone-800">{product.origin}</span>
+                    </div>
+                  )}
+                  {product.materials && (
+                    <div className="flex justify-between">
+                      <span className="text-stone-600">Materials:</span>
+                      <span className="text-stone-800">{product.materials}</span>
+                    </div>
+                  )}
+                  {product.dimensions && (
+                    <div className="flex justify-between">
+                      <span className="text-stone-600">Dimensions:</span>
+                      <span className="text-stone-800">{product.dimensions}</span>
+                    </div>
+                  )}
+                  {product.condition && (
+                    <div className="flex justify-between">
+                      <span className="text-stone-600">Condition:</span>
+                      <span className="text-stone-800">{product.condition}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
               
               <div className="mb-6">
                 <div className="flex items-center mb-2">
                   <Truck size={16} className="text-stone-600 mr-1" />
                   <span className="text-stone-600 text-sm">
-                    {product.inventory > 0 ? 'In Stock' : 'Out of Stock'}
+                    {product.stockQuantity > 0 ? `In Stock (${product.stockQuantity} available)` : 'Out of Stock'}
                   </span>
                 </div>
               </div>
               
               {/* Quantity selector */}
-              <div className="mb-6">
-                <label htmlFor="quantity" className="block text-sm font-medium text-stone-700 mb-2">
-                  Quantity
-                </label>
-                <div className="flex items-center">
-                  <button
-                    type="button"
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    disabled={quantity <= 1}
-                    className="px-3 py-1 border border-stone-300 rounded-l-md bg-stone-50 text-stone-700 hover:bg-stone-100 disabled:opacity-50"
-                  >
-                    -
-                  </button>
-                  <input
-                    id="quantity"
-                    type="number"
-                    min="1"
-                    max={product.inventory}
-                    value={quantity}
-                    onChange={(e) => setQuantity(Math.max(1, Math.min(product.inventory, parseInt(e.target.value) || 1)))}
-                    className="w-16 text-center py-1 border-t border-b border-stone-300 focus:outline-none"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setQuantity(Math.min(product.inventory, quantity + 1))}
-                    disabled={quantity >= product.inventory}
-                    className="px-3 py-1 border border-stone-300 rounded-r-md bg-stone-50 text-stone-700 hover:bg-stone-100 disabled:opacity-50"
-                  >
-                    +
-                  </button>
+              {product.stockQuantity > 0 && (
+                <div className="mb-6">
+                  <label htmlFor="quantity" className="block text-sm font-medium text-stone-700 mb-2">
+                    Quantity
+                  </label>
+                  <div className="flex items-center">
+                    <button
+                      type="button"
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      disabled={quantity <= 1}
+                      className="px-3 py-1 border border-stone-300 rounded-l-md bg-stone-50 text-stone-700 hover:bg-stone-100 disabled:opacity-50"
+                    >
+                      -
+                    </button>
+                    <input
+                      id="quantity"
+                      type="number"
+                      min="1"
+                      max={product.stockQuantity}
+                      value={quantity}
+                      onChange={(e) => setQuantity(Math.max(1, Math.min(product.stockQuantity, parseInt(e.target.value) || 1)))}
+                      className="w-16 text-center py-1 border-t border-b border-stone-300 focus:outline-none"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setQuantity(Math.min(product.stockQuantity, quantity + 1))}
+                      disabled={quantity >= product.stockQuantity}
+                      className="px-3 py-1 border border-stone-300 rounded-r-md bg-stone-50 text-stone-700 hover:bg-stone-100 disabled:opacity-50"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
               
               {/* Action buttons */}
               <div className="flex flex-col space-y-3">
                 <button
                   onClick={handleAddToCart}
-                  disabled={isLoading || product.inventory <= 0}
+                  disabled={isLoading || product.stockQuantity <= 0}
                   className="flex items-center justify-center px-6 py-3 bg-amber-700 hover:bg-amber-800 text-white rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <ShoppingCart size={18} className="mr-2" />
-                  {isLoading ? 'Adding to Cart...' : 'Add to Cart'}
+                  {isLoading ? 'Adding to Cart...' : product.stockQuantity <= 0 ? 'Out of Stock' : 'Add to Cart'}
                 </button>
                 
                 <div className="flex space-x-3">

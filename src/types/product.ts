@@ -1,18 +1,32 @@
-
 export interface Category {
   id: string;
   name: string;
   slug: string;
-  description?: string;
+  description: string | null;
+  image: string | null;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Tribe {
   id: string;
   name: string;
   slug: string;
+  description: string;
   region: string;
-  description?: string;
-  logoUrl?: string;
+  country: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProductImage {
+  id: string;
+  productId: string;
+  url: string;
+  altText: string;
+  isMain: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Product {
@@ -20,24 +34,29 @@ export interface Product {
   name: string;
   slug: string;
   description: string;
-  price: number;
-  inventory: number;
-  isPublished: boolean;
-  isFeatured?: boolean;
-  images: string[];
+  price: number; 
+  stockQuantity: number; 
   categoryId: string;
-  category: Category;
   tribeId: string;
-  tribe: Tribe;
   createdAt: string;
   updatedAt: string;
+  isAntique: boolean;
+  isFeatured: boolean;
+  origin: string;
+  materials: string;
+  dimensions: string;
+  condition: string;
+  isPublished: boolean;
+  category: Category;
+  tribe: Tribe;
+  images: ProductImage[]; // Changed from string[] to ProductImage[]
 }
 
 export interface PaginationData {
   total: number;
   page: number;
   limit: number;
-  totalPages: number;
+  pages: number; // Changed from 'totalPages' to 'pages' to match backend
 }
 
 export interface ProductsData {
@@ -64,20 +83,32 @@ export interface ProductResponse {
 export interface CreateProductInput {
   name: string;
   description: string;
-  price: number;
-  inventory: number;
+  price: string | number; // Allow both string and number for flexibility
+  stockQuantity: number; // Changed from 'inventory'
   categoryId: string;
   tribeId: string;
   isPublished?: boolean;
+  isAntique?: boolean;
+  isFeatured?: boolean;
+  origin?: string;
+  materials?: string;
+  dimensions?: string;
+  condition?: string;
 }
 
 export interface UpdateProductInput {
   id: string;
   name?: string;
   description?: string;
-  price?: number;
-  inventory?: number;
+  price?: string | number;
+  stockQuantity?: number; // Changed from 'inventory'
   categoryId?: string;
   tribeId?: string;
   isPublished?: boolean;
+  isAntique?: boolean;
+  isFeatured?: boolean;
+  origin?: string;
+  materials?: string;
+  dimensions?: string;
+  condition?: string;
 }

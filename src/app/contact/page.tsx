@@ -310,13 +310,15 @@ export default function ContactPage() {
               className="lg:col-span-2 space-y-8"
             >
               {/* FAQ Preview */}
+             {/* FAQ Preview */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold text-stone-800 mb-4">Frequently Asked Questions</h3>
                 <div className="space-y-4">
                   {[
-                    { q: "What types of art do you offer?", a: "Our collection focuses on authentic African art pieces including sculptures, masks, textiles, and contemporary works." },
-                    { q: "Do you ship internationally?", a: "Yes, we offer worldwide shipping with proper insurance and packaging for all art pieces." },
-                    { q: "Can I request a private viewing?", a: "Absolutely! Contact us to schedule a private viewing at our gallery." }
+                    { q: "What types of Antiques do you have in your collection?", a: "My collection spans 50 years of acquiring African art, primarily from Central and East Africa, including masks (mostly Lega), museum-quality statues and figures, and everyday objects from traditional village life." },
+                    { q: "How do you verify authenticity?", a: "Having collected for decades, I've learned to distinguish genuine pieces from later copies. Many items show natural wear from age and use, unlike artificially 'aged' reproductions." },
+                    { q: "Do you ship internationally?", a: "Yes, I can arrange insured shipping worldwide. Each piece will be carefully packed to ensure safe delivery." },
+                    { q: "Can I see the collection in person?", a: "As I am retired and based in Kenya, physical viewings may be possible by appointment for serious inquiries." }
                   ].map((faq, i) => (
                     <div key={i} className="border-b border-stone-200 pb-3 last:border-b-0 last:pb-0">
                       <h4 className="font-medium text-stone-800 mb-1">{faq.q}</h4>
@@ -386,23 +388,19 @@ export default function ContactPage() {
           >
             <h2 className="text-2xl font-bold text-stone-800 text-center mb-8">What Our Clients Say</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
                   name: "Sarah Johnson",
                   role: "Art Collector",
-                  quote: "JFD's knowledge of African art is unparalleled. They helped me find the perfect piece for my collection with personalized service."
+                  quote: "JFD's knowledge of African Antiques is unparalleled. He helped me find the perfect piece for my collection with personalized service."
                 },
                 {
                   name: "Michael Thompson",
                   role: "Interior Designer",
-                  quote: "Working with JFD has been a pleasure. Their curated selection brings authentic African artistry to our design projects."
-                },
-                {
-                  name: "Amara Okafor",
-                  role: "Museum Curator",
-                  quote: "The team at JFD African Art Heritage provides exceptional expertise and authentic pieces with well-documented provenance."
+                  quote: "Working with JFD has been a pleasure. His curated selection brings authentic African artistry to our design projects."
                 }
+    
               ].map((testimonial, i) => (
                 <div key={i} className="bg-white p-6 rounded-lg shadow-md">
                   <div className="flex flex-col h-full">
@@ -431,9 +429,9 @@ export default function ContactPage() {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="text-center"
           >
-            <h2 className="text-2xl font-bold text-stone-800 mb-4">Ready to Explore African Art?</h2>
+            <h2 className="text-2xl font-bold text-stone-800 mb-4">Ready to Explore JFD African Antiques?</h2>
             <p className="text-stone-600 mb-6 max-w-2xl mx-auto">
-              Whether you're looking to start your collection, enhance your space with authentic African art, 
+              Whether you're looking to start your collection, enhance your space with authentic African Antiques, 
               or simply learn more about our pieces, we're here to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
