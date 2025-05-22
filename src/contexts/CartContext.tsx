@@ -1,3 +1,5 @@
+'use client';
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { 
   Cart, 
@@ -140,24 +142,26 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
   };
 
-  const value = {
+  // Calculate derived values
+  const cartItems = cart?.items || [];
+  const totalPrice = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+
+  const value: CartContextType = {
     cart,
     loading,
     error,
+    cartItems,
+    totalPrice,
     addItem,
-    
     updateItem,
-   
     removeItem,
     clearCart,
     refreshCart: () => refreshCart(),
   };
 
   return (
-    <>
+    <CartContext.Provider value={value}>
       {children}
-    </>
+    </CartContext.Provider>
   );
 };
-
-export { };
