@@ -1,6 +1,8 @@
+"use client"
+
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useCart, CartItem } from '@/contexts/CartContext';
+import { useRouter } from 'next/navigation';
+import { useCart } from '@/contexts/CartContext';
 import { createOrder, updateOrderToPaid } from '@/lib/services/order_services';
 
 interface ShippingInfo {
@@ -434,7 +436,7 @@ const CheckoutPage: React.FC = () => {
         <h3 className="text-lg font-semibold mb-4">Order Review</h3>
         
         {/* Order Summary */}
-        <div className="bg-gray-50 p-4 rounded-md">
+        {/* <div className="bg-gray-50 p-4 rounded-md">
           <h4 className="font-medium mb-3">Order Items</h4>
           {cartItems.map((item: CartItem, index: number) => (
             <div key={index} className="flex justify-between items-center py-2 border-b border-gray-200 last:border-b-0">
@@ -445,7 +447,7 @@ const CheckoutPage: React.FC = () => {
               <span>${(item.price * item.quantity).toFixed(2)}</span>
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* Pricing Breakdown */}
         <div className="bg-gray-50 p-4 rounded-md">

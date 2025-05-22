@@ -30,12 +30,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
       <div className="block">
-        <Link href={`/products/${product.id}`} passHref>
-          <div className="relative" style={{ height: '300px' }}>
+        <Link href={`/collections/${product.id}`} passHref>
+          <div className="relative" style={{ }}>
             <img 
               src={getMainImageUrl(product) }
               alt={product.name}
-              className="w-full h-full object-cover"
+              className="w-full h-[100%] object-cover"
             />
             {product.isPublished && (
               <div className="absolute top-3 right-3 bg-amber-700 text-white text-xs px-2 py-1 rounded">
@@ -46,7 +46,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </Link>
         
         <div className="p-4">
-          <Link href={`/products/${product.id}`} passHref>
+          <Link href={`/collections/${product.id}`} passHref>
             <div>
               <h3 className="font-bold text-stone-800">{product.name}</h3>
               <div className="flex items-center mt-1">
