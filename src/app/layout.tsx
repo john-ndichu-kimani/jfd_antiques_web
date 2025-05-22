@@ -4,7 +4,7 @@ import '@/styles/global.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AuthProvider } from '@/contexts/AuthContext';
-
+import { CartProvider } from '@/contexts/CartContext';
 
 export default function RootLayout({
   children,
@@ -14,10 +14,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-stone-50 font-sans">
-       <AuthProvider>
-        <Header />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <CartProvider>
+            <Header />
+            {children}
+            <Footer />
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>

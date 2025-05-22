@@ -6,7 +6,8 @@ import { Navigation } from './Navigation';
 import { MobileMenu } from './MobileMenu';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
 import Link from 'next/link';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/contexts/AuthContext';
+import { MiniCart } from '../cart/MiniCart';
 
 
 export const Header: React.FC = () => {
@@ -89,12 +90,10 @@ export const Header: React.FC = () => {
             
             {/* Right utility icon (cart) */}
             <div className="flex items-center">
-              <Link href="/cart" className="relative text-stone-100 hover:text-amber-800 transition-colors">
-                <ShoppingCart size={22} />
-                <span className="absolute -top-2 -right-2 bg-amber-800 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                  {user?.cartItems?.length || 0}
-                </span>
-              </Link>
+                {/* Mini Cart */}
+            <div className="self-start">
+              <MiniCart />
+            </div>
             </div>
           </div>
           

@@ -6,7 +6,7 @@ import { Button } from '../common/Button';
 import Link from 'next/link';
 import { Product } from '@/types/product';
 import { getFeaturedProducts } from '@/lib/services/product_service';
-import { ProductCard } from '../common/ArtifactCard';
+import ProductCard from '../products/ProductCard';
 
 
 export const FeaturedProducts: React.FC = () => {
@@ -56,7 +56,6 @@ export const FeaturedProducts: React.FC = () => {
               <ProductCard
                 key={product.id}
                 product={product}
-                onSelect={() => console.log(`Selected product: ${product.name}`)}
               />
             ))}
           </div>

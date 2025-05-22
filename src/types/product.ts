@@ -1,23 +1,18 @@
-// types/product.ts
-export interface Tribe {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  region: string;
-  country: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
 export interface Category {
   id: string;
   name: string;
   slug: string;
-  description: string;
-  image: string | null;
-  createdAt: string;
-  updatedAt: string;
+  description?: string;
+}
+
+export interface Tribe {
+  id: string;
+  name: string;
+  slug: string;
+  region: string;
+  description?: string;
+  logoUrl?: string;
 }
 
 export interface Product {
@@ -25,70 +20,64 @@ export interface Product {
   name: string;
   slug: string;
   description: string;
-  price: string;
-  discountPrice: string;
-  stockQuantity: number;
+  price: number;
+  inventory: number;
+  isPublished: boolean;
+  isFeatured?: boolean;
+  images: string[];
   categoryId: string;
+  category: Category;
   tribeId: string;
+  tribe: Tribe;
   createdAt: string;
   updatedAt: string;
-  isAntique: boolean;
-  origin: string;
-  age: string;
-  materials: string;
-  dimensions: string;
-  condition: string;
-  authenticity: string;
-  provenance: string;
-  culturalContext: string;
-  isPublished: boolean;
-  category: Category;
-  tribe: Tribe;
-  featured:boolean;
-  image:string;
-  images: string[]; // You can define a more specific type if you have image data
+}
+
+export interface PaginationData {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export interface ProductsData {
+  products: Product[];
 }
 
 export interface ProductsResponse {
   success: boolean;
-  data: {
-    products: Product[];
-  };
-  pagination: {
-    total: number;
-    page: number;
-    limit: number;
-    pages: number;
-  };
+  data: ProductsData;
+  pagination?: PaginationData;
+  message?: string;
+}
+
+export interface ProductData {
+  product: Product;
 }
 
 export interface ProductResponse {
   success: boolean;
-  data: {
-    product: Product;
-  };
+  data?: ProductData;
+  message?: string;
 }
 
 export interface CreateProductInput {
   name: string;
-  slug: string;
   description: string;
   price: number;
-  discountPrice: number;
-  stockQuantity: number;
+  inventory: number;
   categoryId: string;
   tribeId: string;
-  isAntique: boolean;
-  origin: string;
-  age: string;
-  materials: string;
-  dimensions: string;
-  condition: string;
-  authenticity: string;
-  provenance: string;
-  culturalContext: string;
+  isPublished?: boolean;
 }
 
-export interface UpdateProductInput extends Partial<CreateProductInput> {
+export interface UpdateProductInput {
   id: string;
+  name?: string;
+  description?: string;
+  price?: number;
+  inventory?: number;
+  categoryId?: string;
+  tribeId?: string;
+  isPublished?: boolean;
 }

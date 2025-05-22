@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { ArtifactDetailPage } from '@/components/pages/ArtifactDetailPage';
+import { ArtifactDetailPage } from '@/components/pages/ProductDetail';
 import { featuredArtifacts } from '@/lib/data/artifacts';
 import { Artifact } from '@/models/Artifact';
 
