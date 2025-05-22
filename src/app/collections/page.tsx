@@ -28,6 +28,8 @@ export default function GalleryPage() {
     pages: number;
   } | null>(null);
 
+  
+
   // Animation controls
   const controls = useAnimation();
   const headerRef = useRef<HTMLDivElement>(null);

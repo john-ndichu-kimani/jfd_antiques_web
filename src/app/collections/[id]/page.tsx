@@ -19,13 +19,7 @@ export default function ProductDetailPage({ params }:  {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
 
-  // Helper function to convert string price to number
-const parsePrice = (price: string | number): number => {
-  if (typeof price === 'number') return price;
-  // Remove any currency symbols and parse as float
-  const cleanPrice = price.replace(/[^\d.-]/g, '');
-  return parseFloat(cleanPrice) || 0;
-};
+  
   
   // Get the unwrapped params.id using React.use()
   const { id } = use(params) as { id: string };
@@ -132,37 +126,39 @@ const parsePrice = (price: string | number): number => {
         
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 p-6">
-            {/* Product gallery */}
-            <div className="lg:col-span-3">
-              <div className="relative rounded-lg overflow-hidden mb-4" style={{ height: '400px' }}>
-                <img 
-                  src={getImageUrl(selectedImage)} 
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              
-              {/* Thumbnail gallery if more than one image */}
-              {product.images && product.images.length > 1 && (
-                <div className="flex overflow-x-auto space-x-2 pb-2">
-                  {product.images.map((image, index) => (
-                    <button
-                      key={image.id}
-                      onClick={() => setSelectedImage(index)}
-                      className={`flex-shrink-0 w-20 h-20 rounded-md overflow-hidden border-2 ${
-                        selectedImage === index ? 'border-amber-600' : 'border-transparent'
-                      }`}
-                    >
-                      <img 
-                        src={image.url} 
-                        alt={image.altText || `${product.name} - Image ${index + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+          {/* Product gallery */}
+<div className="lg:col-span-3">
+  {/* Main image container - now using flex to center the image */}
+  <div className="relative rounded-lg overflow-hidden mb-4 flex items-center justify-center bg-gray-100" style={{ height: '70vh' }}>
+    <img 
+      src={getImageUrl(selectedImage)} 
+      alt={product.name}
+      className="max-w-full max-h-full object-contain"
+      style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto' }}
+    />
+  </div>
+  
+  {/* Thumbnail gallery if more than one image */}
+  {product.images && product.images.length > 1 && (
+    <div className="flex overflow-x-auto space-x-2 pb-2">
+      {product.images.map((image, index) => (
+        <button
+          key={image.id}
+          onClick={() => setSelectedImage(index)}
+          className={`flex-shrink-0 w-20 h-20 rounded-md overflow-hidden border-2 ${
+            selectedImage === index ? 'border-amber-600' : 'border-transparent'
+          }`}
+        >
+          <img 
+            src={image.url} 
+            alt={image.altText || `${product.name} - Image ${index + 1}`}
+            className="w-full h-full object-cover"
+          />
+        </button>
+      ))}
+    </div>
+  )}
+</div>
             
             {/* Product details */}
             <div className="lg:col-span-2">
@@ -186,9 +182,7 @@ const parsePrice = (price: string | number): number => {
               
               <div className="flex items-center mb-4">
                 <MapPin size={16} className="text-amber-700 mr-1" />
-                <span className="text-stone-600">
-                  Made by {product.tribe.name} from {product.tribe.region}, {product.tribe.country}
-                </span>
+              
               </div>
               
               <div className="text-2xl font-bold text-amber-700 mb-6">

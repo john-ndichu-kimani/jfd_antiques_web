@@ -1,12 +1,22 @@
 import React from 'react';
 import Link from 'next/link';
 import { Info, MapPin, ShoppingCart } from 'lucide-react';
-import { Product } from '@/types/product';
+import { Product, ProductResponse } from '@/types/product';
 import { useCartActions } from '@/hooks/useCartActions';
 
 interface ProductCardProps {
   product: Product;
 }
+
+const getMainImageUrl = (product: Product): string => {
+  if (!product.images || product.images.length === 0) {
+    return '/placeholder-product.jpg';
+  }
+  
+  // Find the main image or fall back to the first image
+  const mainImage = product.images.find(img => img.isMain) || product.images[0];
+  return mainImage.url;
+};
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { isLoading, addToCart } = useCartActions({ product });
@@ -23,7 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <Link href={`/products/${product.id}`} passHref>
           <div className="relative" style={{ height: '300px' }}>
             <img 
-              src={product.images[0] || '/placeholder-product.jpg'}
+              src={getMainImageUrl(product) }
               alt={product.name}
               className="w-full h-full object-cover"
             />
