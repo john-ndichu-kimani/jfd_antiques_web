@@ -28,44 +28,50 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-      <div className="block">
+    <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 flex flex-col h-[500px]">
+      <div className="block flex-1 flex-col">
         <Link href={`/collections/${product.id}`} passHref>
-          <div className="relative" style={{ }}>
+          <div className="relative h-[250px] bg-gray-50 flex items-center justify-center overflow-hidden">
             <img 
-              src={getMainImageUrl(product) }
+              src={getMainImageUrl(product)}
               alt={product.name}
-              className="w-full h-[100%] object-cover"
+              className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+              style={{ 
+                maxWidth: '100%', 
+                maxHeight: '100%',
+              }}
             />
             {product.isPublished && (
-              <div className="absolute top-3 right-3 bg-amber-700 text-white text-xs px-2 py-1 rounded">
+              <div className="absolute top-3 right-3 bg-amber-700 text-white text-xs px-2 py-1 rounded z-10">
                 Featured
               </div>
             )}
           </div>
         </Link>
         
-        <div className="p-4">
+        <div className="p-4 flex-1 flex flex-col justify-between">
           <Link href={`/collections/${product.id}`} passHref>
-            <div>
-              <h3 className="font-bold text-stone-800">{product.name}</h3>
-              <div className="flex items-center mt-1">
+            <div className="flex-1">
+              <h3 className="font-bold text-stone-800 text-lg mb-2 line-clamp-2 min-h-[3.5rem]">
+                {product.name}
+              </h3>
+              <div className="flex items-center mt-1 mb-3">
                 <span className="text-sm text-stone-500">{product.tribe.name}</span>
                 <span className="mx-2 text-stone-300">•</span>
                 <span className="text-sm text-stone-500">{product.category.name}</span>
               </div>
-              <div className="flex items-center mt-3">
-                <MapPin size={16} className="text-amber-700 mr-1" aria-hidden="true" />
+              <div className="flex items-center mb-3">
+                <MapPin size={16} className="text-amber-700 mr-1 flex-shrink-0" aria-hidden="true" />
                 <span className="text-sm text-stone-600">{product.tribe.region}</span>
               </div>
-              <div className="mt-3 font-bold text-amber-800">
+              <div className="font-bold text-amber-800 text-xl mb-4">
                 ${product.price}
               </div>
             </div>
           </Link>
           
-          {/* Action buttons */}
-          <div className="mt-4 flex items-center space-x-2">
+          {/* Action buttons - Always at bottom */}
+          <div className="flex items-center space-x-2 mt-auto">
             <Link 
               href={`/collections/${product.id}`} 
               passHref

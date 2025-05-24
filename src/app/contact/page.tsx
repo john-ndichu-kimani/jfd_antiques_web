@@ -326,31 +326,10 @@ export default function ContactPage() {
                     </div>
                   ))}
                 </div>
-                <a href="/faq" className="mt-4 inline-block text-amber-600 hover:text-amber-700 font-medium">
-                  View all FAQs →
-                </a>
+             
               </div>
 
-              {/* Map */}
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold text-stone-800 mb-4">Our Location</h3>
-                <div className="aspect-w-16 aspect-h-12 mb-4">
-                  <img 
-                    src="/api/placeholder/600/300" 
-                    alt="Map location" 
-                    className="rounded-md w-full object-cover border border-stone-200"
-                  />
-                </div>
-                <a 
-                  href="https://maps.google.com/?q=123+Art+Gallery+Lane+New+York+NY+10001" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-amber-600 hover:text-amber-700 font-medium"
-                >
-                  <MapPin className="h-4 w-4 mr-2" />
-                  Get Directions
-                </a>
-              </div>
+             
 
               {/* Social Media Links */}
               <div className="bg-white p-6 rounded-lg shadow-md">
