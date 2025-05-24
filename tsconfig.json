@@ -35,7 +35,7 @@
     "**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-  ],
+, "src/components/categories/FeaturedCategories.tsx"  ],
   "exclude": [
     "node_modules"
   ]

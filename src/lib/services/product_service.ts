@@ -25,17 +25,107 @@ const getAuthToken = (): string | null => {
  * Get all products with optional pagination
  */
 
-export const getAllProducts = async (page = 1, limit = 12): Promise<ProductsResponse> => {
+export const getAllProducts = async (params?: {
+  page?: number;
+  limit?: number;
+  categoryId?: string;
+  category?: string; 
+  tribeId?: string;
+  search?: string;
+  isAntique?: boolean;
+  minPrice?: number;
+  maxPrice?: number;
+}): Promise<ProductsResponse> => {
   try {
-    const response = await axios.get<ProductsResponse>(`${API_URL}/products`, {
-      params: { page, limit },
-    });
-    console.log(response.data);
+    const searchParams = new URLSearchParams();
     
-    return response.data;
+    if (params?.page) searchParams.append('page', params.page.toString());
+    if (params?.limit) searchParams.append('limit', params.limit.toString());
+    if (params?.categoryId) searchParams.append('categoryId', params.categoryId);
+    if (params?.category) searchParams.append('category', params.category);
+    if (params?.tribeId) searchParams.append('tribeId', params.tribeId);
+    if (params?.search) searchParams.append('search', params.search);
+    if (params?.isAntique !== undefined) searchParams.append('isAntique', params.isAntique.toString());
+    if (params?.minPrice !== undefined) searchParams.append('minPrice', params.minPrice.toString());
+    if (params?.maxPrice !== undefined) searchParams.append('maxPrice', params.maxPrice.toString());
+    
+    const url = `${API_URL}/products${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
+    
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
   } catch (error) {
-    console.error('Failed to fetch products:', error);
-    throw new Error('Failed to fetch products. Please try again later.');
+    console.error('Error fetching products:', error);
+    throw error;
+  }
+};
+
+// Get products by category slug (new function)
+export const getProductsByCategorySlug = async (
+  categorySlug: string,
+  page: number = 1,
+  limit: number = 12
+): Promise<ProductsResponse> => {
+  try {
+    const response = await fetch(
+      `${API_URL}/products/category/slug/${categorySlug}?page=${page}&limit=${limit}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching products by category slug:', error);
+    throw error;
+  }
+};
+
+
+// Search products
+export const searchProducts = async (
+  query: string,
+  page: number = 1,
+  limit: number = 6
+): Promise<ProductsResponse> => {
+  try {
+    const response = await fetch(
+      `${API_URL}/products/search?query=${encodeURIComponent(query)}&page=${page}&limit=${limit}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error searching products:', error);
+    throw error;
   }
 };
 
@@ -204,25 +294,7 @@ export const deleteProduct = async (id: string): Promise<{ success: boolean }> =
   }
 };
 
-/**
- * Search products by query
- */
-export const searchProducts = async (query: string, page = 1, limit = 12): Promise<ProductsResponse> => {
-  try {
-    const response = await fetch(
-      `${API_URL}/products/search?query=${encodeURIComponent(query)}&page=${page}&limit=${limit}`
-    );
-    
-    if (!response.ok) {
-      throw new Error(`Error searching products: ${response.statusText}`);
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error(`Failed to search products with query ${query}:`, error);
-    throw error;
-  }
-};
+
 
 /**
  * Get products by category ID
