@@ -1,7 +1,7 @@
 // src/hooks/useCartActions.ts
 import { useState } from 'react';
 import { useCart } from '../contexts/CartContext';
-import { Product } from '../lib/services/cart_services';
+import { Product } from '@/types/product';
 
 interface UseCartActionsProps {
   product?: Product;

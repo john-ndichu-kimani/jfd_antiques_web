@@ -1,13 +1,7 @@
+import { Product } from '@/types/product';
 import { v4 as uuidv4 } from 'uuid';
 
-// Types for our cart and related data
-export interface Product {
-  id: string;
-  name: string;
-  description?: string;
-  price: number;
-  imageUrl?: string;
-}
+
 
 export interface CartItem {
   id: string;

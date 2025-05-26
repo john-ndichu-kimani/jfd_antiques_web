@@ -7,7 +7,6 @@ import { ChevronLeft, ShoppingCart, Heart, Share2, Info, MapPin, Truck } from 'l
 import { getProductById } from '@/lib/services/product_service';
 import { Product, ProductResponse } from '@/types/product';
 import { useCartActions } from '@/hooks/useCartActions';
-import { MiniCart } from '@/components/cart/MiniCart';
 
 export default function ProductDetailPage({ params }:  {
   params: Promise<{ id: string }>;
@@ -121,7 +120,6 @@ export default function ProductDetailPage({ params }:  {
             Back to Products
           </button>
           
-          <MiniCart />
         </div>
         
         <div className="bg-white rounded-lg shadow-md overflow-hidden">

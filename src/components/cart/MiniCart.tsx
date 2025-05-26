@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useCart } from '../../contexts/CartContext';
-import { useCartActions } from '../../hooks/useCartActions';
+import { useCartActions } from '@/hooks/useCartActions';
 
 export const MiniCart: React.FC = () => {
   const { cart } = useCart();
@@ -69,9 +69,9 @@ export const MiniCart: React.FC = () => {
                     <div key={item.id} className="flex py-2 border-b">
                       {/* Product image */}
                       <div className="w-12 h-12 bg-gray-200 rounded mr-3">
-                        {item.product.imageUrl && (
+                        {item.product.images && (
                           <img 
-                            src={item.product.imageUrl} 
+                            src={item.product.images[0].url} 
                             alt={item.product.name}
                             className="w-full h-full object-cover rounded"
                           />
