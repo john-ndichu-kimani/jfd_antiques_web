@@ -1,4 +1,3 @@
-import { Provenance } from "@/components/sections/Provenance";
 import { Newsletter } from "@/components/sections/Newsletter";
 import Hero from "@/components/sections/Hero";
 import { FeaturedProducts } from "@/components/sections/FeaturedProducts";
@@ -10,7 +9,6 @@ export default function Home() {
       <Hero />
       <FeaturedCategories />
       <FeaturedProducts />
-      <Provenance />
       <Newsletter />
     </main>
   );
